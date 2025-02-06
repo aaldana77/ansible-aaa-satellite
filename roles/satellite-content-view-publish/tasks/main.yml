@@ -1,0 +1,62 @@
+---
+# tasks file for satellite-content-view-publish
+
+- name: "Get all Satellite's Content Views"
+  redhat.satellite.content_view_info:
+    server_url: "{{ satellite_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password}}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    search: "name !~ Default"
+  register: satellite_content_views
+#  when:
+#    - publish_all == 'Yes'
+
+#- name: debug satellite_content_views
+#  ansible.builtin.debug:
+#    var: satellite_content_views
+ 
+- name: "Process satellite's data"
+  ansible.builtin.set_fact:
+    processed_content_views: "{{ processed_content_views + [ { \"organization\" : item.organization.name, \"content_view\" : item.name } ] }}"
+  loop: "{{ satellite_content_views.content_views }}"
+  loop_control:
+    label: "{{ item.name }}"
+#  when:
+#    - publish_all == 'Yes'
+
+- name: "Update package filter"
+  redhat.satellite.content_view_filter:
+    server_url: "{{ satellite_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password}}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    name: "SSC Monthly Patch Cycle"
+    description: " Monthly Patch Cycle Filter\nManaged by AAA"
+    organization: "{{ item.organization }}"
+    content_view: "{{ item.content_view }}"
+    filter_type: 'erratum'
+    filter_state: present
+    date_type: issued
+    start_date: "{{ lookup('pipe','date +%Y-%m') }}-02"
+    types: ['bugfix','enhancement','security'] 
+  loop: "{{ processed_content_views }}"
+  loop_control:
+    label: "{{ item.content_view }}"
+
+- name: "Publish Content Views"
+  redhat.satellite.content_view_version:
+    server_url: "{{ satellite_url }}"
+    username: "{{ satellite_username }}"
+    password: "{{ satellite_password}}"
+    validate_certs: "{{ satellite_validate_certs }}"
+    organization: "{{ item.organization }}"
+    content_view: "{{ item.content_view }}"
+    lifecycle_environments:
+      - Library
+      - Testing
+      - Rollout
+  loop: "{{ processed_content_views }}"
+  loop_control:
+    label: "{{ item.content_view }}"
+  

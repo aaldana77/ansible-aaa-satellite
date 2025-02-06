@@ -1,0 +1,11 @@
+---
+# vars file for satellite-content-view-publish
+#
+# Red Hat Satellite Variables
+#Variable in Automation PLattform
+#satellite_url: '<changeme>'
+
+satellite_url: '<changeme>'
+satellite_username: '<changeme>'
+satellite_password: '<changeme>'
+satellite_validate_certs: false

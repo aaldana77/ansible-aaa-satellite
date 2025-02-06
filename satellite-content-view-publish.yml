@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  gather_facts: false
+  roles:
+    - satellite-content-view-publish

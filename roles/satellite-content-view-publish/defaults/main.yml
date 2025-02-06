@@ -1,0 +1,8 @@
+---
+# defaults file for satellite-content-view-publish
+
+#This Playbook were made to run in the Ansible Core in Satellite
+ansible_connection: local
+
+#processed_content_views: rray to store content views information (Organization and name)
+processed_content_views: []
