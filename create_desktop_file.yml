@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    
+  - name: "A single  ansible.txt text file is created"
+    ansible.windows.win_copy:
+      content: 'This is the Server Windows server managed by ansible'
+      dest: C:\temp\ansible.txt
+
+
