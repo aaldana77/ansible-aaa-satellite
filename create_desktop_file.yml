@@ -2,6 +2,11 @@
 - hosts: all
   tasks:
     
+  - name: "CReate directory strucuture"
+    ansible.windows.win_file:
+      path: C:\temp
+      state: directory
+
   - name: "A single  ansible.txt text file is created"
     ansible.windows.win_copy:
       content: 'This is the Server Windows server managed by ansible'
