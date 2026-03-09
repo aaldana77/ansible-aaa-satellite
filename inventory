@@ -1,0 +1,14 @@
+[windows_servers]
+win1.test.net
+win2.test.net
+
+[windows_ad]
+da001.test.net
+
+[all:vars]
+ansible_connection: winrm
+ansible_port: 5986
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: credssp
+ansible_winrm_scheme: https
+ansible_winrm_proxy: ~
