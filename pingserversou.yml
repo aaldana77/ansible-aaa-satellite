@@ -1,0 +1,6 @@
+- name: Ping Servers in the Servers OU
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: ping Servers
+      ansible.windows.win_ping:
