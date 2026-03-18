@@ -1,0 +1,18 @@
+# tasks file for windows-test
+---
+
+- name: New group in "{{ domainname }}" is created
+  microsoft.ad.group:
+    name: aaa_group
+    scope: global
+  
+- name: New user in "{{ domainname }}"" is created
+  microsoft.ad.user:
+    name: andresito
+    firstname: andresito
+    lastname: aldana
+    state: present
+    groups:
+      set:
+        - Domain Users
+        - aaa_group
