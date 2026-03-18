@@ -1,0 +1,16 @@
+[33m7a4c96b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m add role windows-test-credssp-AD
+[33m5074207[m v1.6.0
+[33m4f78ae6[m add version microsoft.a
+[33mb0849a4[m commet community.windows
+[33m9f5c79b[m inventory_AD
+[33mc4d894d[m Fix equal inventory file
+[33md0b3f3d[m add inventory
+[33m6429464[m add kerberos role test
+[33mce1e782[m add credssp role test
+[33me633b07[m add roles/windows-test/
+[33m4d7860c[m uncomment vars winrm
+[33mdd7131b[m comment  vars
+[33m55ba227[m add vars
+[33mef1f66b[m add create directory temps
+[33m4eb497d[m add file windows
+[33m635e175[m first commit
