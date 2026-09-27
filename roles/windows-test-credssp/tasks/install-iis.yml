@@ -1,0 +1,18 @@
+---
+- name: Install the IIS Web Service
+  hosts: win1.example.com
+  tasks:
+    - name: II service installed
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
+    - name: II service started
+      ansible.windows.win_service:
+        name: W3Svc
+        state: started
+
+    - name: Website index.html created
+      ansible.windows.win_copy:
+        content: "Hello word"
+        dest: C:\inetpub\wwwroot\index.html
